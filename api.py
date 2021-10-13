@@ -78,7 +78,7 @@ def split_categories(text: str) -> List[str]:
     return out
 
 
-@app.post("/genres/train")
+@app.post("/train")
 def train(file: bytes = File(...)) -> None:
     """Train a predictive model to rank movie genres based on their synopsis."""
     # Get file from endpoint
@@ -111,7 +111,7 @@ def train(file: bytes = File(...)) -> None:
     pickle.dump(tfidf_vectorizer, open("tfidf.p", "wb"))
 
 
-@app.post("/genres/predict")
+@app.post("/predict")
 def predict(file: bytes = File(...)) -> None:
     """Predict the genres of the movies in the test set."""
     df = pd.read_csv(BytesIO(file))
